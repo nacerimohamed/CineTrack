@@ -1,0 +1,21 @@
+# Environment and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies
+**/vendor/
+**/node_modules/
+
+# Expo
+**/.expo/
+**/dist/
+**/web-build/
+
+# Laravel generated files
+/backend/storage/*.key
+/backend/bootstrap/cache/*.php
+
+# System files
+**/.DS_Store
+**/Thumbs.db
