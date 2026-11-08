@@ -142,6 +142,3 @@ CineTrack is developed as a mobile-first application using React Native and Expo
 
 - GitHub: [@nacerimohamed](https://github.com/nacerimohamed)
 
----
-
-*Built with passion for movies and technology.* 🎬
