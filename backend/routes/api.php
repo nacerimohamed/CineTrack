@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Http\Request;
@@ -6,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\UserMovieController;
 
 // Authentication
 Route::post('/register', [AuthController::class, 'register']);
@@ -33,18 +33,15 @@ Route::get('/email/verify/{id}/{hash}', function (
     ]);
 })->middleware('signed')->name('verification.verify');
 
-// Protected routes
 // Movies - TMDB
 Route::get('/movies/trending', [MovieController::class, 'trending']);
 Route::get('/movies/top-rated', [MovieController::class, 'topRated']);
 Route::get('/movies/search', [MovieController::class, 'search']);
 Route::get('/movies/{id}', [MovieController::class, 'details'])->whereNumber('id');
 
-
+// Protected routes
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::post('/logout', [AuthController::class, 'logout']);
-
     Route::get('/user', [AuthController::class, 'user']);
 
     Route::post('/email/resend', function (Request $request) {
@@ -62,4 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
             'message' => 'Verification email sent successfully.',
         ]);
     });
+
+    // User movies: Watchlist and Watched
+    Route::get('/user/movies', [UserMovieController::class, 'index']);
+    Route::post('/user/movies', [UserMovieController::class, 'store']);
+    Route::patch('/user/movies/{movieId}', [UserMovieController::class, 'update']);
+    Route::delete('/user/movies/{movieId}', [UserMovieController::class, 'destroy']);
 });
